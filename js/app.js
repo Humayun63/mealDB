@@ -1,9 +1,13 @@
 const cardContainer = document.getElementById('card-container');
-const loadData = async (searchWord) => {
+const loadData = async (searchWord ='chicken', clicked) => {
     try {
         const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchWord}`);
         const data = await res.json();
-        displayData(data.meals);
+        if(clicked){
+            displayAllData(data.meals);
+        }else{
+            displayData(data.meals);
+        }
 
     } catch (error) {
         console.log(error)
@@ -14,7 +18,6 @@ const displayData = (data) => {
     for (let i = 0; i < 6; i++) {
         const element = data[i];
         createElement(element);
-
     }
 }
 const displayAllData = data => {
@@ -51,7 +54,9 @@ const createElement = element => {
     cardContainer.appendChild(div);
 }
 const showAll = () => {
-    loadData('chicken')
+    const searchField = document.getElementById('search-field');
+    const searchWord = searchField.value;
+    loadData(searchWord, true);
 }
 const displayModal = (idMeal) => {
     const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`;
@@ -74,7 +79,7 @@ const modalInfoUpdate = data => {
 const search = () => {
     const searchField = document.getElementById('search-field');
     const searchWord = searchField.value;
-    searchField.value = '';
+    // searchField.value = '';
     loadData(searchWord);
 }
-loadData('fish')
+loadData();
