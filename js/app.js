@@ -30,8 +30,6 @@ const displayAllData = data => {
 const createElement = element => {
     const idMeal = element.idMeal;
     const div = document.createElement('div');
-    // div.classList.add('card', 'mb-3');
-    // div.setAttribute('style', 'max-width: 540px');
     div.innerHTML = `
         <div class="card mb-3 p-2">
             <div class="row mt-1 g-0 align-items-center">
@@ -80,7 +78,6 @@ const modalInfoUpdate = data => {
 const search = () => {
     const searchField = document.getElementById('search-field');
     const searchWord = searchField.value;
-    // searchField.value = '';
     loadData(searchWord);
 }
 loadData();
